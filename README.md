@@ -27,12 +27,12 @@ A sorting algorithm is used to rearrange the elements of an array according to a
 
 ### Randomly generated unsorted array
 
-<img src="media/unsorted.png" width=640>
+<img src="media/unsorted.png">
 
 ### Sorting
 
-<img src="media/sorting.gif" width=640>
+<img src="media/sorting.gif">
 
 ### Dark mode
 
-<img src="media/dark mode.png" width=640>
+<img src="media/dark mode.png">
