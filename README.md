@@ -3,6 +3,8 @@ Interactive, visual representation of various sorting algorithms using Python an
 
 In this project, I create a user interface for an interactive, visual representation for various sorting algorithms.
 
+To run the program, simply run the UI.py script.
+
 ## Requirements:
 * The program was created using **Python3.7**
 * The UI was created using **Tkinter** (preinstalled with Python)
@@ -16,6 +18,8 @@ A sorting algorithm is used to rearrange the elements of an array according to a
 * **Insertion Sort** O(n^2)
 * **Merge Sort** O(nlog(n))
 * **Quick Sort** O(nlog(n))
+
+The package is designed in a way that more algorithms can be easily added. 
 
 ## Features:
 * **Generate random unsorted array**
