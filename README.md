@@ -25,6 +25,7 @@ The package is designed in a way that more algorithms can be easily added.
 * **Generate random unsorted array**
 * **Drop down menu to select the sorting algorithm**
 * **Sort button** begins the sorting algorithm
+* **Set length of array** entry field allows you to set the length of the array you want to sort
 * **Clear button** clears the screen
 * **A visual representation** of the array and sorting process that updates in realtime.
 * And finally no UI is complete without an inbuilt **dark color scheme** :smiley:
