@@ -34,10 +34,18 @@ The package is designed in a way that more algorithms can be easily added.
 
 <img src="media/unsorted.png">
 
-### Sorting
+### Sorted array after insertion sort
+
+<img src="media/sorted.png">
+
+### Sorting and array of length 20 using bubble sort
 
 <img src="media/sorting.gif">
 
 ### Dark mode
 
-<img src="media/dark mode.png">
+<img src="media/night mode.png">
+
+### Large arrays
+
+<img src="media/huge array.png">
