@@ -2,13 +2,17 @@ import random
 import time
 
 class Algorithm:
-    def __init__(self, name):
-        self.array = random.sample(range(600), 600)
+    def __init__(self, name, elements=600):
+        self.elements = elements
+        self.array = random.sample(range(600), self.elements)
         self.name = name
 
     def reset(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color):
-        self.array = random.sample(range(600), 600)
+        self.array = random.sample(range(600), self.elements)
         self.update(canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color)
+
+    def change_num_elements(self, elements):
+        self.elements = elements
 
     def update(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, swap1=None, swap2=None, ):
         canvas.configure(bg=mainScreenColor)
