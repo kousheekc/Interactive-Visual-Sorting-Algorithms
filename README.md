@@ -38,7 +38,7 @@ The package is designed in a way that more algorithms can be easily added.
 
 <img src="media/sorted.png">
 
-### Sorting and array of length 20 using bubble sort
+### Sorting an array of length 20 using bubble sort
 
 <img src="media/sorting.gif">
 
