@@ -1,18 +1,18 @@
 # Interactive-Visual-Sorting-Algorithms
-Interactive, visual representation of various sorting algorithms using Python and Tkinter
+Interactive and Visual representation of various sorting algorithms using Python and Tkinter
 
-In this project, I create a user interface for an interactive, visual representation for various sorting algorithms.
+In this project, I create a user interface for an interactive, visual representation for various sorting algorithms. A GIF is attached below which gives a demo of the features that are available.
 
-To run the program, simply run the UI.py script.
+<img src="media/sorting.gif">
 
-## Requirements:
-* The program was created using **Python3.7**
-* The UI was created using **Tkinter** (preinstalled with Python)
+## About The Project
+A sorting algorithm is used to rearrange the elements of an array according to a specific comparision operator. For example, when dealing with numbers, one might want to sort numbers in ascending or descending order. Being able to sort large amounts of data in an efficient manner is useful since other algorithms may depends on data that is sorted or simply for producing an output that is easy for humans to read.
 
-## Sorting:
-A sorting algorithm is used to rearrange the elements of an array according to a specific comparision operator. For example, when dealing with numbers, one might want to sort numbers in ascending or descending order. 
+Sorting a set of data can be defined by two conditions:
+1. The output is ordered (small to big or big to small)
+2. The output is a permutation of the unsorted data (no elements removed or added)
 
-## Algorithms:
+### Algorithms:
 * **Selection Sort** O(n^2)
 * **Bubble Sort** O(n^2)
 * **Insertion Sort** O(n^2)
@@ -21,22 +21,50 @@ A sorting algorithm is used to rearrange the elements of an array according to a
 
 The package is designed in a way that more algorithms can be easily added. 
 
-## Features:
+## Getting Started
+
+### Prerequisites
+* The program was created using **Python3.7**
+* The UI was created using **Tkinter** (preinstalled with Python)
+
+### Installation
+To install the Interactive Visual Sorting Algorithms app, clone this repository using the following command:
+```
+git clone https://github.com/kousheekc/Interactive-Visual-Sorting-Algorithms.git
+```
+
+## Usage
+To run the app open a terminal and navigate to the folder you just cloned and run the following command:
+```
+python3 -m app
+```
+Once the app is running the interface is self-explanatory. The features of the app are listed below.
+
+### Features:
 * **Generate random unsorted array**
 * **Drop down menu to select the sorting algorithm**
 * **Sort button** begins the sorting algorithm
-* **Set length of array** entry field allows you to set the length of the array you want to sort
 * **Clear button** clears the screen
 * **A visual representation** of the array and sorting process that updates in realtime.
 * And finally no UI is complete without an inbuilt **dark color scheme** :smiley:
 
-### Randomly generated unsorted array
 
-<img src="media/unsorted.png">
+## License
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
-### Sorted array after insertion sort
+## Contact
+Kousheek Chakraborty - kousheekc@gmail.com
 
-<img src="media/sorted.png">
+Project Link: [https://github.com/kousheekc/Interactive-Visual-Sorting-Algorithms](https://github.com/kousheekc/Interactive-Visual-Sorting-Algorithms)
+
+
+### Random BST
+
+<img src="media/unbalanced.png" width=640>
+
+### Balanced BST
+
+<img src="media/balanced.png" width=640>
 
 ### Sorting an array of length 20 using bubble sort
 
@@ -44,8 +72,4 @@ The package is designed in a way that more algorithms can be easily added.
 
 ### Dark mode
 
-<img src="media/night mode.png">
-
-### Large arrays
-
-<img src="media/huge array.png">
+<img src="media/dark_color_scheme.png" width=640>
