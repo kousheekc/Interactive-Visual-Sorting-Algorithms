@@ -2,10 +2,9 @@ from tkinter import *
 from tkinter import ttk
 
 class Interface:
-    def __init__(self, algos):
+    def __init__(self, algos, array):
         self.algos = algos
-
-        self.length = 100
+        self.array = array
 
         self.outlineColor = '#1e1e1e'
         self.mainScreenColor = '#e6e6e6'
@@ -23,36 +22,32 @@ class Interface:
 
         self.canvas = Canvas(self.window, height = self.canvasHeight-80, width = self.canvasWidth, borderwidth=0, highlightthickness=0)
 
+        self.show_steps = IntVar()
         n = StringVar() 
+        self.colorScheme = IntVar()
+        self.colorScheme.set(0)
         self.algoPicker = ttk.Combobox(self.window, width=26, font=('arial', 14), textvariable=n) 
         self.algoPicker['values'] = [algo for algo in self.algos]
 
-        self.generateButton = Button(self.window, width=10, font=('arial', 14), text='generate', borderwidth=0, command=self.generateUnsortedList)
-        self.sortButton = Button(self.window, width=10, font=('arial', 14), text='sort', borderwidth=0, command=self.sortList)   
+        self.sortButton = Button(self.window, width=20, font=('arial', 14), text='sort', borderwidth=0, command=self.sortList)   
+        self.generateButton = Button(self.window, width=20, font=('arial', 14), text='generate', borderwidth=0, command=self.generateUnsortedList)  
         self.clearButton = Button(self.window, width=10, font=('arial', 14), text='clear', borderwidth=0, command=self.clearCanvas) 
-        self.changeLengthButton = Button(self.window, width=20, font=('arial', 14), text='update length', borderwidth=0, command=self.updateLength)  
         self.lengthEntry = Entry(self.window, font=('arial', 13), width=25, borderwidth=0, justify=CENTER)
-
-        self.colorScheme = IntVar()
-        self.colorScheme.set(0)
-
+        self.show_steps_checkbox = Checkbutton(self.window, font=('arial', 12), text="show steps", variable=self.show_steps)
         self.darkRB = Radiobutton(self.window, text="dark", font=('arial', 10, 'bold'), variable=self.colorScheme, bg=self.menuBarColor, fg=self.buttonColor, value=1, command=self.setColorScheme)
         self.lightRB = Radiobutton(self.window, text="light", font=('arial', 10, 'bold'), variable=self.colorScheme, bg=self.menuBarColor, fg=self.buttonColor, value=0, command=self.setColorScheme)
 
         self.setColorScheme()
 
         self.algoPicker.place(x=5, y=48)
-
-        self.generateButton.place(x=5,y=5)
-        self.sortButton.place(x=125,y=5)
-        self.changeLengthButton.place(x=350,y=5)
+        self.sortButton.place(x=5,y=5)
+        self.generateButton.place(x=350,y=5)
         self.lengthEntry.place(x=350, y=48)
+        self.show_steps_checkbox.place(x=640, y=45)
         self.clearButton.place(x=970,y=5)
         self.darkRB.place(x=1130, y=0)
         self.lightRB.place(x=1130, y=20)
         self.canvas.pack(side='bottom')
-
-        self.userInputAndVisualize()
 
     def setColorScheme(self):
         if self.colorScheme.get() == 1:
@@ -74,33 +69,46 @@ class Interface:
 
         self.window.configure(bg=self.menuBarColor)
         self.canvas.configure(bg=self.mainScreenColor)
-        self.generateButton.configure(fg=self.mainScreenColor, bg=self.buttonColor, activebackground=self.buttonColor, activeforeground=self.mainScreenColor)
-        self.changeLengthButton.configure(fg=self.mainScreenColor, bg=self.buttonColor, activebackground=self.buttonColor, activeforeground=self.mainScreenColor)
         self.lengthEntry.configure(bg=self.mainScreenColor, fg=self.outlineColor, insertbackground=self.outlineColor)
         self.sortButton.configure(fg=self.mainScreenColor, bg=self.buttonColor, activebackground=self.buttonColor, activeforeground=self.mainScreenColor)
+        self.generateButton.configure(fg=self.mainScreenColor, bg=self.buttonColor, activebackground=self.buttonColor, activeforeground=self.mainScreenColor)
+        self.show_steps_checkbox.configure(bg=self.menuBarColor, fg=self.buttonColor, activebackground=self.menuBarColor, activeforeground=self.buttonColor)
         self.clearButton.configure(fg=self.mainScreenColor, bg=self.buttonColor, activebackground=self.buttonColor, activeforeground=self.mainScreenColor)
         self.darkRB.configure(bg=self.menuBarColor, fg=self.buttonColor, activebackground=self.menuBarColor, activeforeground=self.buttonColor)
         self.lightRB.configure(bg=self.menuBarColor, fg=self.buttonColor, activebackground=self.menuBarColor, activeforeground=self.buttonColor)
         
-    def updateLength(self):
-        self.length = int(self.lengthEntry.get())       
-
     def generateUnsortedList(self):
-        algo = self.algos[self.algoPicker.get()]
-        algo.change_num_elements(self.length)
-        algo.reset(self.canvas, self.mainScreenColor, self.linesColor, self.canvasHeight, self.canvasWidth, self.swap1Color, self.swap2Color)
-        # self.update(algo)
+        length = int(self.lengthEntry.get())       
+        self.array.reset(length)
+        self.update_array()
 
     def sortList(self):
         algo = self.algos[self.algoPicker.get()]
-        algo.algorithm(self.canvas, self.mainScreenColor, self.linesColor, self.canvasHeight, self.canvasWidth, self.swap1Color, self.swap2Color)
-        # self.update(algo)
+        swaps = algo.algorithm(self.array)
+        for swap in swaps:
+            self.update_array(swap[0], swap[1])
 
     def clearCanvas(self):
         self.canvas.delete("all")
-        self.canvas.update()
 
-    def userInputAndVisualize(self):
-        loopActive = True
-        while loopActive:
-            self.canvas.update()
+    def update_array(self, swap1=None, swap2=None):
+        self.canvas.configure(bg=self.mainScreenColor)
+        self.canvas.delete("all")
+
+        k = int(self.canvasWidth/len(self.array))
+
+        for i in range(len(self.array)):
+            colour = self.linesColor
+
+            if swap1 == self.array[i]:
+                colour = self.swap1Color
+            elif swap2 == self.array[i]:
+                colour = self.swap2Color
+
+            self.canvas.create_rectangle(i*k, self.array[i], i*k+k, self.canvasHeight, fill=colour)
+        
+        self.canvas.pack()  
+
+
+    def update(self):
+        self.canvas.update()

@@ -1,56 +1,21 @@
-import random
-import time
 
-class Algorithm:
-    def __init__(self, name, elements=600):
-        self.elements = elements
-        self.array = random.sample(range(600), self.elements)
-        self.name = name
-
-    def reset(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color):
-        self.array = random.sample(range(600), self.elements)
-        self.update(canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color)
-
-    def change_num_elements(self, elements):
-        self.elements = elements
-
-    def update(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, swap1=None, swap2=None, ):
-        canvas.configure(bg=mainScreenColor)
-        canvas.delete("all")
-
-        k = int(canvasWidth/len(self.array))
-
-        for i in range(len(self.array)):
-            colour = linesColor
-
-            if swap1 == self.array[i]:
-                colour = swap1Color
-            elif swap2 == self.array[i]:
-                colour = swap2Color
-
-            canvas.create_rectangle(i*k, self.array[i], i*k+k, canvasHeight, fill=colour)
-        
-        canvas.pack()  
-        canvas.update()
-
-
-class SelectionSort(Algorithm):
+class SelectionSort:
     def __init__(self):
-        super().__init__("SelectionSort")
+        pass
 
-    def algorithm(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color):
-        for i in range(len(self.array)):
+    def algorithm(self, array):
+        for i in range(len(array)):
             min_idx = i
-            for j in range(i+1, len(self.array)):
-                if self.array[j] < self.array[min_idx]:
+            for j in range(i+1, len(array)):
+                if array[j] < array[min_idx]:
                     min_idx = j
-            self.array[i], self.array[min_idx] = self.array[min_idx], self.array[i]
-            self.update(canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, self.array[i], self.array[min_idx])
+            array[i], array[min_idx] = array[min_idx], array[i]
+            yield [array[i], array[min_idx]]
 
 
-class BubbleSort(Algorithm):
+class BubbleSort:
     def __init__(self):
-        super().__init__("BubbleSort")
+        pass
 
     def algorithm(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color):
         for i in range(len(self.array)):
@@ -60,9 +25,9 @@ class BubbleSort(Algorithm):
             self.update(canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, self.array[j], self.array[j+1])
 
 
-class InsertionSort(Algorithm):
+class InsertionSort:
     def __init__(self):
-        super().__init__("InsertionSort")
+        pass
 
     def algorithm(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color):
         for i in range(len(self.array)):
@@ -75,9 +40,9 @@ class InsertionSort(Algorithm):
             self.update(canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, self.array[idx], self.array[i])
 
 
-class MergeSort(Algorithm):
+class MergeSort:
     def __init__(self):
-        super().__init__("MergeSort")
+        pass
 
     def algorithm(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, array=[]):
         if array == []:
@@ -107,10 +72,10 @@ class MergeSort(Algorithm):
         return result
 
 
-class QuickSort(Algorithm):
+class QuickSort:
     def __init__(self):
-        super().__init__("QuickSort")
-
+        pass
+    
     def algorithm(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, array=[], start=0, end=0):
         if array == []:
             array = self.array
