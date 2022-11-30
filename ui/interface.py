@@ -1,10 +1,9 @@
 from tkinter import *
 from tkinter import ttk
-import algorithms
 
-class VisualSortingAlgos:
-    def __init__(self):
-        self.algos = {"Selection Sort": algorithms.SelectionSort(), "Bubble Sort": algorithms.BubbleSort(), "Insertion Sort": algorithms.InsertionSort(), "Merge Sort": algorithms.MergeSort(), "Quick Sort": algorithms.QuickSort()}
+class Interface:
+    def __init__(self, algos):
+        self.algos = algos
 
         self.length = 100
 
@@ -105,5 +104,3 @@ class VisualSortingAlgos:
         loopActive = True
         while loopActive:
             self.canvas.update()
-
-VisualSortingAlgos()
