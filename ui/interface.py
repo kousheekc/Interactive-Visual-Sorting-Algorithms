@@ -81,36 +81,35 @@ class Interface:
     def generateUnsortedList(self):
         length = int(self.lengthEntry.get())       
         self.array.reset(length)
-        self.update_array()
+        self.update_array(self.array, None, None)
 
     def sortList(self):
         algo = self.algos[self.algoPicker.get()]
-        swaps = algo.algorithm(self.array)
-        for swap in swaps:
+        states = algo.algorithm(self.array)
+        for state in states:
             if (self.show_steps.get() == 1):
                 time.sleep(0.1)
-            self.update_array(swap[0], swap[1])
-
+            self.update_array(state[0], state[1], state[2])
 
     def clearCanvas(self):
         self.canvas.delete("all")
         self.update()
 
-    def update_array(self, swap1=None, swap2=None):
+    def update_array(self, array, swap1, swap2):
         self.canvas.configure(bg=self.mainScreenColor)
         self.canvas.delete("all")
 
-        k = int(self.canvasWidth/len(self.array))
+        k = int(self.canvasWidth/len(array))
 
-        for i in range(len(self.array)):
+        for i in range(len(array)):
             colour = self.linesColor
 
-            if swap1 == self.array[i]:
+            if swap1 == i:
                 colour = self.swap1Color
-            elif swap2 == self.array[i]:
+            elif swap2 == i:
                 colour = self.swap2Color
 
-            self.canvas.create_rectangle(i*k, self.array[i], i*k+k, self.canvasHeight, fill=colour)
+            self.canvas.create_rectangle(i*k, array[i], i*k+k, self.canvasHeight, fill=colour)
         
         self.canvas.pack()
         self.update()
