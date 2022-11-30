@@ -17,27 +17,27 @@ class BubbleSort:
     def __init__(self):
         pass
 
-    def algorithm(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color):
-        for i in range(len(self.array)):
-            for j in range(len(self.array)-1-i):
-                if self.array[j] > self.array[j+1]:
-                    self.array[j], self.array[j+1] = self.array[j+1], self.array[j]
-            self.update(canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, self.array[j], self.array[j+1])
+    def algorithm(self, array):
+        for i in range(len(array)):
+            for j in range(len(array)-1-i):
+                if array[j] > array[j+1]:
+                    array[j], array[j+1] = array[j+1], array[j]
+            yield [array[j], array[j+1]]
 
 
 class InsertionSort:
     def __init__(self):
         pass
 
-    def algorithm(self, canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color):
-        for i in range(len(self.array)):
-            cursor = self.array[i]
+    def algorithm(self, array):
+        for i in range(len(array)):
+            cursor = array[i]
             idx = i
-            while idx > 0 and self.array[idx-1] > cursor:
-                self.array[idx] = self.array[idx-1]
+            while idx > 0 and array[idx-1] > cursor:
+                array[idx] = array[idx-1]
                 idx -= 1
-            self.array[idx] = cursor
-            self.update(canvas, mainScreenColor, linesColor, canvasHeight, canvasWidth, swap1Color, swap2Color, self.array[idx], self.array[i])
+            array[idx] = cursor
+            yield [array[idx], array[i]]
 
 
 class MergeSort:

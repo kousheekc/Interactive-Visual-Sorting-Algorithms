@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import time
 
 class Interface:
     def __init__(self, algos, array):
@@ -23,9 +24,9 @@ class Interface:
         self.canvas = Canvas(self.window, height = self.canvasHeight-80, width = self.canvasWidth, borderwidth=0, highlightthickness=0)
 
         self.show_steps = IntVar()
-        n = StringVar() 
         self.colorScheme = IntVar()
         self.colorScheme.set(0)
+        n = StringVar() 
         self.algoPicker = ttk.Combobox(self.window, width=26, font=('arial', 14), textvariable=n) 
         self.algoPicker['values'] = [algo for algo in self.algos]
 
@@ -86,10 +87,14 @@ class Interface:
         algo = self.algos[self.algoPicker.get()]
         swaps = algo.algorithm(self.array)
         for swap in swaps:
+            if (self.show_steps.get() == 1):
+                time.sleep(0.1)
             self.update_array(swap[0], swap[1])
+
 
     def clearCanvas(self):
         self.canvas.delete("all")
+        self.update()
 
     def update_array(self, swap1=None, swap2=None):
         self.canvas.configure(bg=self.mainScreenColor)
@@ -107,7 +112,8 @@ class Interface:
 
             self.canvas.create_rectangle(i*k, self.array[i], i*k+k, self.canvasHeight, fill=colour)
         
-        self.canvas.pack()  
+        self.canvas.pack()
+        self.update()
 
 
     def update(self):
