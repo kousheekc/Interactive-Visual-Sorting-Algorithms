@@ -54,31 +54,23 @@ class MergeSort:
             left = array[:mid]
             right = array[mid:]
 
-            # Recursive call on each half
             self.algorithm(left)
             self.algorithm(right)
 
-            # Two iterators for traversing the two halves
             i = 0
             j = 0
             
-            # Iterator for the main list
             k = 0
             
             while i < len(left) and j < len(right):
                 if left[i] <= right[j]:
-                    # The value from the left half has been used
                     array[k] = left[i]
-                    # Move the iterator forward
                     i += 1
                 else:
                     array[k] = right[j]
-
                     j += 1
-                # Move to the next slot
                 k += 1
 
-            # For all the remaining values
             while i < len(left):
                 array[k] = left[i]
                 i += 1
@@ -90,41 +82,38 @@ class MergeSort:
                 k += 1
 
             self.states.append([array[:], None, None])
-            print(array)
 
         return self.states          
 
 class QuickSort:
     def __init__(self):
-        pass
+        self.states = []
+
+    def algorithm(self, array, low=-1, high=-1):
+        if (high == -1):
+            low = 0
+            high = len(array) - 1
+
+        if low < high:
+            pivot = self.partition(array, low, high)
+
+            self.algorithm(array, low, pivot - 1)
+            self.algorithm(array, pivot + 1, high)
+
+        return self.states
     
-    def algorithm(self, array, start=-1, end=-1):
-        swaps = []
-        print("yoo")
-        if (end == -1):
-            start = 0
-            end = len(array) - 1
+    def partition(self, array, low, high):
+        pivot = array[high]
 
-        if start < end:
-            pivot, swap = self.partition(array, start, end)
-            print(pivot)
-            swaps.append(swap)
+        i = low - 1
 
-            self.algorithm(array, start, pivot-1)
-            self.algorithm(array, pivot+1, end)
-        else:
-            print("returning")
-            for swap in swaps:
-                yield swap
+        for j in range(low, high):
+            if array[j] <= pivot:
+                i = i + 1
+                array[i], array[j] = array[j], array[i]
+                # self.states.append([array[:], i, j])
 
-    def partition(self, array, start, end):
-        x = array[end]
-        i = start-1
-        swap = [None, None]
-        for j in range(start, end+1, 1):
-            if array[j] <= x:
-                i += 1
-                if i < j:
-                    array[i], array[j] = array[j], array[i]
-                    swap = [array[i], array[j]]
-        return i, swap
+
+        array[i + 1], array[high] = array[high], array[i + 1]
+        self.states.append([array[:], i+1, high])
+        return i + 1
