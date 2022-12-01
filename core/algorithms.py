@@ -48,40 +48,47 @@ class MergeSort:
     def __init__(self):
         self.states = []
 
-    def algorithm(self, array):
-        if len(array) > 1:
-            mid = len(array) // 2
-            left = array[:mid]
-            right = array[mid:]
+    def algorithm(self, array, start=-1, end=-1, aux=[]):
+        if (end == -1):
+            start = 0
+            end = len(array) - 1
+            aux = array[:]
 
-            self.algorithm(left)
-            self.algorithm(right)
+        if start == end:
+            return
 
-            i = 0
-            j = 0
-            
-            k = 0
-            
-            while i < len(left) and j < len(right):
-                if left[i] <= right[j]:
-                    array[k] = left[i]
-                    i += 1
-                else:
-                    array[k] = right[j]
-                    j += 1
+        mid = (start + end) // 2
+        self.algorithm(aux, start, mid, array)
+        self.algorithm(aux, mid+1, end, array)
+
+        i = start
+        j = mid + 1
+        
+        k = start
+        
+        while i <= mid and j <= end:
+            if aux[i] <= aux[j]:
+                array[k] = aux[i]
+                self.states.append([array[:], k, i])
+
                 k += 1
-
-            while i < len(left):
-                array[k] = left[i]
                 i += 1
-                k += 1
+            else:
+                array[k] = aux[j]
+                self.states.append([array[:], k, j])
 
-            while j < len(right):
-                array[k]=right[j]
+                k += 1
                 j += 1
-                k += 1
 
-            self.states.append([array[:], None, None])
+        while i <= mid:
+            array[k] = aux[i]
+            k += 1
+            i += 1
+
+        while j <= end:
+            array[k] = aux[j]
+            k += 1
+            j += 1
 
         return self.states          
 
@@ -89,31 +96,31 @@ class QuickSort:
     def __init__(self):
         self.states = []
 
-    def algorithm(self, array, low=-1, high=-1):
-        if (high == -1):
-            low = 0
-            high = len(array) - 1
+    def algorithm(self, array, start=-1, end=-1):
+        if (end == -1):
+            start = 0
+            end = len(array) - 1
 
-        if low < high:
-            pivot = self.partition(array, low, high)
+        if start < end:
+            pivot = self.partition(array, start, end)
 
-            self.algorithm(array, low, pivot - 1)
-            self.algorithm(array, pivot + 1, high)
+            self.algorithm(array, start, pivot - 1)
+            self.algorithm(array, pivot + 1, end)
 
         return self.states
     
-    def partition(self, array, low, high):
-        pivot = array[high]
+    def partition(self, array, start, end):
+        pivot = array[end]
 
-        i = low - 1
+        i = start - 1
 
-        for j in range(low, high):
+        for j in range(start, end):
             if array[j] <= pivot:
                 i = i + 1
                 array[i], array[j] = array[j], array[i]
                 # self.states.append([array[:], i, j])
 
 
-        array[i + 1], array[high] = array[high], array[i + 1]
-        self.states.append([array[:], i+1, high])
+        array[i + 1], array[end] = array[end], array[i + 1]
+        self.states.append([array[:], i+1, end])
         return i + 1
