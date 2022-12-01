@@ -1,4 +1,4 @@
-# Interactive-Visual-Sorting-Algorithms
+# Interactive Visual Sorting Algorithms
 Interactive and Visual representation of various sorting algorithms using Python and Tkinter
 
 In this project, I create a user interface for an interactive, visual representation for various sorting algorithms. A GIF is attached below which gives a demo of the features that are available.
