@@ -57,19 +57,22 @@ Kousheek Chakraborty - kousheekc@gmail.com
 
 Project Link: [https://github.com/kousheekc/Interactive-Visual-Sorting-Algorithms](https://github.com/kousheekc/Interactive-Visual-Sorting-Algorithms)
 
+### Unsorted
 
-### Random BST
+<img src="media/unsorted.png" width=640>
 
-<img src="media/unbalanced.png" width=640>
+### Sorted
 
-### Balanced BST
-
-<img src="media/balanced.png" width=640>
+<img src="media/sorted.png" width=640>
 
 ### Sorting an array of length 20 using bubble sort
 
 <img src="media/sorting.gif">
 
+### Big array
+
+<img src="media/big_array.png" width=640>
+
 ### Dark mode
 
-<img src="media/dark_color_scheme.png" width=640>
+<img src="media/dark_mode.png" width=640>
